@@ -1,6 +1,6 @@
 {
   "name": "pompom",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Pomodoro timer right in your terminal!",
   "main": "index.js",
   "bin": {
