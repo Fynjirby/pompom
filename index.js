@@ -5,6 +5,7 @@ const blessed = require("blessed");
 const fs = require("fs");
 const path = require("path");
 const os = require("os");
+const figlet = require("figlet");
 const player = require("play-sound")({});
 
 // set some defaults
@@ -178,11 +179,13 @@ function updateHelpContent() {
       ` {bold}[2]{/bold}     : Switch to SHORT BREAK mode - ${currentDurations.SHORT_BREAK}m\n` +
       ` {bold}[3]{/bold}     : Switch to LONG BREAK mode - ${currentDurations.LONG_BREAK}m\n` +
       ` {bold}[+/-]{/bold}   : Increase/decrease current duration\n` +
-      ` {bold}[a]{/bold}     : Toggle auto-switch (currently ${autoSwitch ? "ON" : "OFF"})\n` +
+      ` {bold}[a]{/bold}     : Toggle auto-switch (currently ${
+        autoSwitch ? "ON" : "OFF"
+      })\n` +
       ` {bold}[c]{/bold}     : Clear statistics\n` +
       ` {bold}[?]{/bold}     : Show this help\n` +
       ` {bold}[q]{/bold}     : Quit PomPom\n\n` +
-      `{center}Press any key to close this help{/center}`,
+      `{center}Press any key to close this help{/center}`
   );
 }
 
@@ -203,7 +206,16 @@ function formatTime(seconds) {
   const minutes = Math.floor(seconds / 60);
   const secs = seconds % 60;
 
-  return `${minutes.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+  const text = `${minutes.toString().padStart(2, "0")}:${secs
+    .toString()
+    .padStart(2, "0")}`.replaceAll("", " ");
+
+  return figlet.textSync(text, {
+    horizontalLayout: "default",
+    verticalLayout: "default",
+    width: 80,
+    whitespaceBreak: true,
+  });
 }
 
 // reset to default duration function
@@ -230,10 +242,12 @@ function resetToDefaultDuration() {
 
   updateMenuBar();
   timerDisplay.setContent(
-    `{bold}${formatTime(currentTime)}{/bold}\n\n${currentMode.name}\n\nCompleted Focus Sessions: ${completedFocus}`,
+    `{bold}${formatTime(currentTime)}{/bold}\n\n${
+      currentMode.name
+    }\n\n${completedFocus} focus sessions completed`
   );
   setStatus(
-    `${currentMode.name} reset to default duration (${defaultDuration} minutes)`,
+    `${currentMode.name} reset to default duration (${defaultDuration} minutes)`
   );
 
   updateSettings();
@@ -242,7 +256,7 @@ function resetToDefaultDuration() {
 // update menu bar function
 function updateMenuBar() {
   menuBar.setContent(
-    ` 1 - FOCUS - ${currentDurations.FOCUS}m    2 - SHORT BREAK - ${currentDurations.SHORT_BREAK}m    3 - LONG BREAK - ${currentDurations.LONG_BREAK}m`,
+    ` 1 - FOCUS - ${currentDurations.FOCUS}m    2 - SHORT BREAK - ${currentDurations.SHORT_BREAK}m    3 - LONG BREAK - ${currentDurations.LONG_BREAK}m`
   );
   screen.render();
 }
@@ -267,7 +281,9 @@ function switchMode(mode, resetTimer = true) {
 
   timerDisplay.style.fg = currentMode.color;
   timerDisplay.setContent(
-    `{bold}${formatTime(currentTime)}{/bold}\n\n${currentMode.name}\n\nCompleted Focus Sessions: ${completedFocus}`,
+    `{bold}${formatTime(currentTime)}{/bold}\n\n${
+      currentMode.name
+    }\n\n`
   );
 
   setStatus(`${currentMode.name} - Ready`);
@@ -288,7 +304,9 @@ function changeDuration(change) {
 
   updateMenuBar();
   timerDisplay.setContent(
-    `{bold}${formatTime(currentTime)}{/bold}\n\n${currentMode.name}\n\nCompleted Focus Sessions: ${completedFocus}`,
+    `{bold}${formatTime(currentTime)}{/bold}\n\n${
+      currentMode.name
+    }\n\n`
   );
   setStatus(`${currentMode.name} duration changed to ${newDuration} minutes`);
 
@@ -317,7 +335,7 @@ function startTimer() {
       }
 
       setStatus(
-        `${currentMode.name} completed! Focus sessions: ${completedFocus}`,
+        `${currentMode.name} completed! Focus sessions: ${completedFocus}`
       );
 
       if (autoSwitch) {
@@ -336,7 +354,9 @@ function startTimer() {
     }
 
     timerDisplay.setContent(
-      `{bold}${formatTime(currentTime)}{/bold}\n\n${currentMode.name}\n\nCompleted Focus Sessions: ${completedFocus}`,
+      `{bold}${formatTime(currentTime)}{/bold}\n\n${
+        currentMode.name
+      }\n\n`
     );
     screen.render();
   }, 1000);
@@ -359,7 +379,9 @@ function resetTimer() {
   currentTime = currentDurations[modeKey] * 60;
   setStatus(`${currentMode.name} - Reset`);
   timerDisplay.setContent(
-    `{bold}${formatTime(currentTime)}{/bold}\n\n${currentMode.name}\n\nCompleted Focus Sessions: ${completedFocus}`,
+    `{bold}${formatTime(currentTime)}{/bold}\n\n${
+      currentMode.name
+    }\n\n`
   );
   screen.render();
 }
@@ -412,7 +434,9 @@ function toggleAutoSwitch() {
 function clearStats() {
   completedFocus = 0;
   timerDisplay.setContent(
-    `{bold}${formatTime(currentTime)}{/bold}\n\n${currentMode.name}\n\nCompleted Focus Sessions: ${completedFocus}`,
+    `{bold}${formatTime(currentTime)}{/bold}\n\n${
+      currentMode.name
+    }\n\n`
   );
   setStatus("Statistics cleared");
 
@@ -487,7 +511,9 @@ screen.on("keypress", (ch, key) => {
 
 // show session count
 timerDisplay.setContent(
-  `{bold}${formatTime(currentTime)}{/bold}\n\n${currentMode.name}\n\nCompleted Focus Sessions: ${completedFocus}`,
+  `{bold}${formatTime(currentTime)}{/bold}\n\n${
+    currentMode.name
+  }\n\n${completedFocus} focus sessions completed`
 );
 
 // thats all folks!

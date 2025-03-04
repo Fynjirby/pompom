@@ -21,6 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "blessed": "^0.1.81",
+    "figlet": "^1.8.0",
     "play-sound": "^1.1.5"
   },
   "repository": {
