@@ -30,6 +30,7 @@ npm i -g pompom
 ## Usage
 
 Simply run in your terminal:
+
 ```bash
 pompom
 ```
@@ -46,7 +47,8 @@ PomPom follows the Pomodoro Technique:
 
 ## Customization
 
-PomPom stores your settings in `~/.pompom/settings.json`. You can also replace the default sound file with your own by placing a `sound.wav` file in `~/.pompom`.
+PomPom stores your settings in `~/.pompom/settings.json`.
+You can also replace the default sound file with your own by placing a `sound.wav` file in `~/.pompom`.
 
 ## Thanks
 

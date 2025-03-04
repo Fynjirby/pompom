@@ -281,9 +281,7 @@ function switchMode(mode, resetTimer = true) {
 
   timerDisplay.style.fg = currentMode.color;
   timerDisplay.setContent(
-    `{bold}${formatTime(currentTime)}{/bold}\n\n${
-      currentMode.name
-    }\n\n`
+    `{bold}${formatTime(currentTime)}{/bold}\n\n${currentMode.name}\n\n`
   );
 
   setStatus(`${currentMode.name} - Ready`);
@@ -306,7 +304,7 @@ function changeDuration(change) {
   timerDisplay.setContent(
     `{bold}${formatTime(currentTime)}{/bold}\n\n${
       currentMode.name
-    }\n\n`
+    }\n\n${completedFocus} focus sessions completed`
   );
   setStatus(`${currentMode.name} duration changed to ${newDuration} minutes`);
 
@@ -354,9 +352,7 @@ function startTimer() {
     }
 
     timerDisplay.setContent(
-      `{bold}${formatTime(currentTime)}{/bold}\n\n${
-        currentMode.name
-      }\n\n`
+      `{bold}${formatTime(currentTime)}{/bold}\n\n${currentMode.name}\n\n`
     );
     screen.render();
   }, 1000);
@@ -379,9 +375,7 @@ function resetTimer() {
   currentTime = currentDurations[modeKey] * 60;
   setStatus(`${currentMode.name} - Reset`);
   timerDisplay.setContent(
-    `{bold}${formatTime(currentTime)}{/bold}\n\n${
-      currentMode.name
-    }\n\n`
+    `{bold}${formatTime(currentTime)}{/bold}\n\n${currentMode.name}\n\n`
   );
   screen.render();
 }
@@ -436,7 +430,7 @@ function clearStats() {
   timerDisplay.setContent(
     `{bold}${formatTime(currentTime)}{/bold}\n\n${
       currentMode.name
-    }\n\n`
+    }\n\n${completedFocus} focus sessions completed`
   );
   setStatus("Statistics cleared");
 
