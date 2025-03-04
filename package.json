@@ -4,8 +4,8 @@
   "description": "Pomodoro timer right in your terminal!",
   "main": "index.js",
   "bin": {
-    "pompom": "./index.js",
-    "pom": "./index.js"
+    "pompom": "index.js",
+    "pom": "index.js"
   },
   "scripts": {
     "start": "bun index.js"
@@ -22,5 +22,13 @@
   "dependencies": {
     "blessed": "^0.1.81",
     "play-sound": "^1.1.5"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fynjirby/pompom.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fynjirby/pompom/issues"
+  },
+  "homepage": "https://github.com/fynjirby/pompom#readme"
 }
